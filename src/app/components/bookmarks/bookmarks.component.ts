@@ -1,12 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, SimpleChanges, OnChanges } from '@angular/core';
 
 import { IBookmark, Bookmark } from 'src/app/models/bookmark.interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IAppState } from 'src/app/store/state/app.state';
 import { Store } from '@ngrx/store';
 import { AddBookmark, DeleteBookmark, GroupBookmark } from 'src/app/store/actions/bookmark.actions';
 import { MatTable } from '@angular/material';
+import { Observable, of, from } from 'rxjs';
+import { map, distinct, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
     selector: 'app-bookmarks',
@@ -29,9 +31,20 @@ export class BookmarksComponent implements OnInit {
     uniqueGroups: string[];
     displayedColumns: string[] = ['name', 'url', 'group', 'delete'];
     isGroup: boolean;
+    uniqueGroups$: Observable<IBookmark[]>;
 
+    constructor(private fb: FormBuilder, private _store: Store<IAppState>, private _router: Router) {
+        
+     }
 
-    constructor(private fb: FormBuilder, private _store: Store<IAppState>, private _router: Router) { }
+    // ngOnChanges(changes: SimpleChanges) {
+    //     // changes.bookmarks contains the old and the new value...
+    //     this.uniqueGroups = ['programming', 'news', 'work'];
+    //     console.log('ngOnChanges');
+    //     if(this.bookmarks != null) {
+    //         console.log('this.bookmarks : ' + this.bookmarks.length)
+    //     }
+    // }
 
     ngOnInit() { 
         this.uniqueGroups = ['programming', 'news', 'work'];
@@ -39,16 +52,19 @@ export class BookmarksComponent implements OnInit {
     }
 
     bookmarkForm = this.fb.group({
-        name: [''],
-        url: [''],
-        group: ['']
+        name: ['', [Validators.required]],
+        url: ['', [Validators.required]],
+        group: ['', [Validators.required]]
     })
 
     selectGroupForm = this.fb.group({
         selectedGroup: ['']
     })
 
-    onSubmit(e) {
+    onSave(e) {
+        if (this.bookmarkForm.invalid) {
+            return;
+        }
         this.isGroup = false;
         let name = this.bookmarkForm.get('name').value;
         let url = this.bookmarkForm.get('url').value;
@@ -57,6 +73,15 @@ export class BookmarksComponent implements OnInit {
 
         this._store.dispatch(new AddBookmark(bookmark));
         this.table.renderRows();
+    }
+
+    onClear(e) {
+        this.bookmarkForm.get('name').setValue('');
+        this.bookmarkForm.get('url').setValue('');
+        this.bookmarkForm.get('group').setValue('');
+        this.bookmarkForm.controls['name'].setErrors(null);
+        this.bookmarkForm.controls['url'].setErrors(null);
+        this.bookmarkForm.controls['group'].setErrors(null);
     }
 
     onDelete(bookmark: IBookmark) {
@@ -71,4 +96,8 @@ export class BookmarksComponent implements OnInit {
         this._store.dispatch(new GroupBookmark(selectedGroup));
         this.table.renderRows();        
     }
+
+    get name() { return this.bookmarkForm.get('name'); }
+    get url() { return this.bookmarkForm.get('url'); }
+    get group() { return this.bookmarkForm.get('group'); }
 }

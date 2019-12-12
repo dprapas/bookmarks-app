@@ -21,24 +21,30 @@ export const bookmarkReducers = (
         };
     }
     case EBookmarkActions.DeleteBookmarkSuccess: {
-        return {
-            ...state,
-            bookmarks: action.payload
+
+        console.log('STATE1 : ' + JSON.stringify(state.bookmarks.length))
+        console.log('action.payload : ' + JSON.stringify(action.payload))
+        let newState = {
+          ...state,
+          bookmarks: action.payload
         };
-    }
-    case EBookmarkActions.GroupBookmarkSuccess: {
-        console.log('state2 : ' + JSON.stringify(state))
+
+        console.log('STATE2 : ' + JSON.stringify(newState.bookmarks.length))
         console.log('action.payload : ' + JSON.stringify(action.payload))
 
+        return newState;
+        // return {
+        //     ...state,
+        //     bookmarks: action.payload
+        // };
+    }
+    case EBookmarkActions.GroupBookmarkSuccess: {
+        
         let newState = {
             ...state,
             //bookmarks: action.payload,
             groupedBookmarks: action.payload
         }
-
-        console.log('state3 : ' + JSON.stringify(state))
-        console.log('action.payload : ' + JSON.stringify(action.payload))
-
         return newState; 
         // return {
         //     ...state,

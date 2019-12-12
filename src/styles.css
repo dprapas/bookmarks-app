@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html,body{height:100%;}
-body{margin:0;font-family:Roboto, "Helvetica Neue", sans-serif;}
+body{font-family:Roboto, "Helvetica Neue", sans-serif;}
 form{width:520px;display:block;float:none;}
 .mat-form-field{width:100%;}
 .misc-bottom-padding{margin:8px 0 20px;}

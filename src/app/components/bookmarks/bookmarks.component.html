@@ -1,7 +1,8 @@
-<br/>
-<div>Sample Bookmark Application</div>
-<br/>
+<mat-toolbar color="primary">
+    <span>Sample Bookmark Application</span>
+</mat-toolbar>
 
+<div class="container-fluid">
 <form [formGroup]="selectGroupForm">
     <mat-form-field>
         <mat-label>Select Group</mat-label>
@@ -21,7 +22,7 @@
 
     <ng-container matColumnDef="url">
         <th mat-header-cell *matHeaderCellDef> Url </th>
-        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"> {{bookmark.url}} </td>
+        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"><a href="{{bookmark.url}}"> {{bookmark.url}} </a></td>
     </ng-container>
 
     <ng-container matColumnDef="group">
@@ -32,7 +33,7 @@
     <ng-container matColumnDef="delete">
 		<th mat-header-cell *matHeaderCellDef> </th>
 		<td class="mat-column-action" mat-cell *matCellDef="let bookmark">
-			<button type="button" (click)="onDelete(bookmark)">Delete</button>
+            <button mat-icon-button color="warn" (click)="onDelete(bookmark)"><mat-icon>delete</mat-icon></button>
 		</td>
 	</ng-container>
 
@@ -48,7 +49,7 @@
 
     <ng-container matColumnDef="url">
         <th mat-header-cell *matHeaderCellDef> Url </th>
-        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"> {{bookmark.url}} </td>
+        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"><a href="{{bookmark.url}}"> {{bookmark.url}} </a></td>
     </ng-container>
 
     <ng-container matColumnDef="group">
@@ -59,7 +60,7 @@
     <ng-container matColumnDef="delete">
 		<th mat-header-cell *matHeaderCellDef> </th>
 		<td class="mat-column-action" mat-cell *matCellDef="let bookmark">
-			<button type="button" (click)="onDelete(bookmark)">Delete</button>
+			<button mat-icon-button color="warn" (click)="onDelete(bookmark)"><mat-icon>delete</mat-icon></button>
 		</td>
 	</ng-container>
 
@@ -70,18 +71,24 @@
 <br/><br/>
 <div>Add New Bookmark</div>
 
-<form  [formGroup]="bookmarkForm">
-    <mat-form-field >
-      <input matInput placeholder="Bookmark Name" formControlName="name">
-    </mat-form-field>
-  
-    <mat-form-field >
-        <input matInput placeholder="Bookmark Url" formControlName="url">
+<form [formGroup]="bookmarkForm">
+    <mat-form-field>
+        <input matInput placeholder="Bookmark Name" formControlName="name" required>
+        <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">Name is required</mat-error>
     </mat-form-field>
 
-    <mat-form-field >
-        <input matInput placeholder="Bookmark Group" formControlName="group">
+    <mat-form-field>
+        <input matInput placeholder="Bookmark Url" formControlName="url" required>
+        <mat-error *ngIf="url.invalid && (url.dirty || url.touched)">Url is required</mat-error>
     </mat-form-field>
 
-    <button type="button" color="primary" (click)="onSubmit($event)">Submit</button>
+    <mat-form-field>
+        <input matInput placeholder="Bookmark Group" formControlName="group" required>
+        <mat-error *ngIf="group.invalid && (group.dirty || group.touched)">Group is required</mat-error>
+    </mat-form-field>
+
+    <span class="btn-span"><button mat-raised-button color="primary" (click)="onSave($event)">Save</button></span>
+    <span class="btn-span"><button mat-raised-button color="primary" (click)="onClear($event)">Clear</button></span>
 </form>
+
+</div>
