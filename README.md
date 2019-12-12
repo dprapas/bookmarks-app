@@ -65,6 +65,8 @@ Briefly the flow of the application is the following:
 
 ## Screenshots
 
+![Alt text](/screnshots/screenshot1.png?raw=true "Displays Initial Data")
+
 ## How to run the application
 
 To run the application locally follow the instructions below:
