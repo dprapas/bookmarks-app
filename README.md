@@ -65,7 +65,7 @@ Briefly the flow of the application is the following:
 
 ## Screenshots
 
-![Alt text](/screnshots/screenshot1.png?raw=true "Displays Initial Data")
+![Alt text](/screenshots/screenshot1.png?raw=true "Displays Initial Data")
 
 ## How to run the application
 
