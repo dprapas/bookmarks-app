@@ -35,8 +35,9 @@ export class BookmarkEffects {
         map(action => action.payload),
         withLatestFrom(this._store.pipe(select(selectBookmarkList))),
         switchMap(([bookmark, bookmarks]) => {
-            bookmarks.push(bookmark);
-            return of(new AddBookmarkSuccess(bookmarks));
+            var newArray = bookmarks.slice();
+            newArray.push(bookmark);
+            return of(new AddBookmarkSuccess(newArray));
         })
     );
 
@@ -46,9 +47,10 @@ export class BookmarkEffects {
         map(action => action.payload),
         withLatestFrom(this._store.pipe(select(selectBookmarkList))),
         switchMap(([bookmark, bookmarks]) => {
-            const index = bookmarks.findIndex(b => b.name === bookmark.name);
-            bookmarks.splice(index, 1);
-            return of(new DeleteBookmarkSuccess(bookmarks));
+            var newArray = bookmarks.slice();
+            const index = newArray.findIndex(b => b.name === bookmark.name);
+            newArray.splice(index, 1);
+            return of(new DeleteBookmarkSuccess(newArray));
         })
     );
 
