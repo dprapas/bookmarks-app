@@ -1,0 +1,15 @@
+.mat-column-name {
+    width: 200px;
+}
+
+.mat-column-url {
+    width: 250px;
+}
+
+.mat-column-group {
+    width: 150px;
+}
+
+.mat-column-action {
+    width: 80px;
+}

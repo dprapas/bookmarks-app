@@ -1,0 +1,87 @@
+<br/>
+<div>Sample Bookmark Application</div>
+<br/>
+
+<form [formGroup]="selectGroupForm">
+    <mat-form-field>
+        <mat-label>Select Group</mat-label>
+        <mat-select (selectionChange)="onChangeGroup($event)" formControlName="selectedGroup">
+            <mat-option *ngFor="let group of uniqueGroups" [value]="group">
+                {{group}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</form>
+
+<table *ngIf="isGroup" mat-table [dataSource]="groupedBookmarks" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td class="mat-column-name" mat-cell *matCellDef="let bookmark"> {{bookmark.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef> Url </th>
+        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"> {{bookmark.url}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef> Group </th>
+        <td class="mat-column-group" mat-cell *matCellDef="let bookmark"> {{bookmark.group}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+		<th mat-header-cell *matHeaderCellDef> </th>
+		<td class="mat-column-action" mat-cell *matCellDef="let bookmark">
+			<button type="button" (click)="onDelete(bookmark)">Delete</button>
+		</td>
+	</ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<table *ngIf="!isGroup" mat-table [dataSource]="bookmarks" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td class="mat-column-name" mat-cell *matCellDef="let bookmark"> {{bookmark.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="url">
+        <th mat-header-cell *matHeaderCellDef> Url </th>
+        <td class="mat-column-url" mat-cell *matCellDef="let bookmark"> {{bookmark.url}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="group">
+        <th mat-header-cell *matHeaderCellDef> Group </th>
+        <td class="mat-column-group" mat-cell *matCellDef="let bookmark"> {{bookmark.group}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+		<th mat-header-cell *matHeaderCellDef> </th>
+		<td class="mat-column-action" mat-cell *matCellDef="let bookmark">
+			<button type="button" (click)="onDelete(bookmark)">Delete</button>
+		</td>
+	</ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<br/><br/>
+<div>Add New Bookmark</div>
+
+<form  [formGroup]="bookmarkForm">
+    <mat-form-field >
+      <input matInput placeholder="Bookmark Name" formControlName="name">
+    </mat-form-field>
+  
+    <mat-form-field >
+        <input matInput placeholder="Bookmark Url" formControlName="url">
+    </mat-form-field>
+
+    <mat-form-field >
+        <input matInput placeholder="Bookmark Group" formControlName="group">
+    </mat-form-field>
+
+    <button type="button" color="primary" (click)="onSubmit($event)">Submit</button>
+</form>
