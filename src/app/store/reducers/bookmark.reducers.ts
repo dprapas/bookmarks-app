@@ -8,8 +8,6 @@ export const bookmarkReducers = (
 ): IBookmarkState => {
   switch (action.type) {
     case EBookmarkActions.GetBookmarksSuccess: {
-        console.log('state1 : ' + JSON.stringify(state))
-        console.log('action.payload : ' + JSON.stringify(action.payload))
       return {
         ...state,
         bookmarks: action.payload,
