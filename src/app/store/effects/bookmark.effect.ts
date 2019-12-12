@@ -8,8 +8,6 @@ import { IAppState } from '../state/app.state';
 import {
     GetBookmarksSuccess,
     EBookmarkActions,
-    GetBookmarkSuccess,
-    GetBookmark,
     GetBookmarks,
     AddBookmark,
     AddBookmarkSuccess,
@@ -60,12 +58,10 @@ export class BookmarkEffects {
         map(action => action.payload),
         withLatestFrom(this._store.pipe(select(selectBookmarkList))),
         switchMap(([selectedGroup, bookmarks]) => {
-            console.log('bookmarks : ' + bookmarks.length)
             var newArray = bookmarks.slice();
             let groupedBookmarks = newArray.filter(function( obj ) {
                 return obj.group === selectedGroup;
             });
-            console.log('groupedArray : ' + groupedBookmarks.length)
             return of(new GroupBookmarkSuccess(groupedBookmarks));
         })
     );

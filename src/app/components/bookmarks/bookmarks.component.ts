@@ -33,18 +33,7 @@ export class BookmarksComponent implements OnInit {
     isGroup: boolean;
     uniqueGroups$: Observable<IBookmark[]>;
 
-    constructor(private fb: FormBuilder, private _store: Store<IAppState>, private _router: Router) {
-        
-     }
-
-    // ngOnChanges(changes: SimpleChanges) {
-    //     // changes.bookmarks contains the old and the new value...
-    //     this.uniqueGroups = ['programming', 'news', 'work'];
-    //     console.log('ngOnChanges');
-    //     if(this.bookmarks != null) {
-    //         console.log('this.bookmarks : ' + this.bookmarks.length)
-    //     }
-    // }
+    constructor(private fb: FormBuilder, private _store: Store<IAppState>, private _router: Router) {}
 
     ngOnInit() { 
         this.uniqueGroups = ['programming', 'news', 'work'];
