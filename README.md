@@ -65,7 +65,20 @@ Briefly the flow of the application is the following:
 
 ## Screenshots
 
-![Alt text](/screenshots/screenshot1.png?raw=true "Displays Initial Data")
+1. Home page - Displays the initial data
+![Alt text](/screenshots/screenshot1.png?raw=true "Displays initial data")
+
+2. Select a group - Displays the filtered by group data
+![Alt text](/screenshots/screenshot2.png?raw=true "Displays the filtered by group data")
+
+3. Fill up the form - Displays the new bookmark which is to added using the form
+![Alt text](/screenshots/screenshot3.png?raw=true "Displays the new bookmark added to form")
+
+4. New bookmark added - Displays the new bookmark added to the list
+![Alt text](/screenshots/screenshot4.png?raw=true "Displays the new bookmark which is to added using the form")
+
+5. Bookmarks have been deleted - Displays the bookmark list after deletion of some bookmarks
+![Alt text](/screenshots/screenshot5.png?raw=true "Displays the bookmark list after deletion of some bookmarks")
 
 ## How to run the application
 
